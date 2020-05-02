@@ -1,5 +1,4 @@
 class Maybe:
-
     class IsEmptyException(Exception):
         ...
 
@@ -63,3 +62,11 @@ class Maybe:
     @staticmethod
     def just(x):
         return Maybe(x)
+
+    @staticmethod
+    def from_lambda(f, *args, **kwargs):
+        result = f(*args, **kwargs)
+        if result is None:
+            return Maybe.nothing()
+        else:
+            return Maybe.just(result)
